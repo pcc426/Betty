@@ -38,7 +38,13 @@ class BestvScreenshotAndroidTests(unittest.TestCase):
         t1.press(x=350, y=400).wait(1000).release().perform()
         time.sleep(15)
         # 保存截图到指定目录下
-        self.driver.get_screenshot_as_file("/../../../screenshots/screenshot_" + self._testMethodName + time.ctime() + ".png")
+        try:
+            self.driver.get_screenshot_as_file("screenshot_" + self._testMethodName + time.ctime() + ".png")
+        except IOError:
+            print IOError
+        else:
+            print "screenshot save successfully!"
+
 
 
 if __name__ == '__main__':
