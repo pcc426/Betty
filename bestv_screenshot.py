@@ -4,18 +4,17 @@ import os
 from appium.webdriver.common.touch_action import TouchAction
 import unittest
 from appium import webdriver
-from time import sleep
+import time
 
 PATH=lambda p:os.path.abspath(os.path.join(os.path.dirname(__file__), p))
 
 
-class BestvSampleAndroidTests(unittest.TestCase):
+class BestvScreenshotAndroidTests(unittest.TestCase):
     def setUp(self):
         desired_caps = {}
         desired_caps['device'] = 'android'
         desired_caps['platformName'] = 'Android'
         desired_caps['version'] = 'Default'
-        # 更换真机测试时需变更deviceName
         desired_caps['deviceName'] = 'EUQKCUIBE6RKPNTG'
         # 不重置app
         desired_caps['noReset'] = 'True'
@@ -28,17 +27,20 @@ class BestvSampleAndroidTests(unittest.TestCase):
     def tearDown(self):
         self.driver.quit()
 
-    def test_find_element(self):
+    def test_play_screenshot(self):
         # 等待广告
-        sleep(10)
-        self.driver.find_element_by_xpath("//android.widget.Button[contains(@text, '直播')]").click()
-        sleep(2)
+        time.sleep(20)
+        # 切换频道
+        self.driver.find_element_by_xpath("//android.widget.TextView[contains(@text, '娱乐综艺')]").click()
+        time.sleep(5)
+        t1 = TouchAction(self.driver)
+        # 通过坐标点击分类下banners
+        t1.press(x=350, y=400).wait(1000).release().perform()
+        time.sleep(15)
+        # 保存截图到指定目录下
+        self.driver.get_screenshot_as_file("/../../../screenshots/screenshot_" + self._testMethodName + time.ctime() + ".png")
 
-    def test_swipe(self):
-        # 跳过广告
-        sleep(10)
-        # 第二种方法使用缓慢拖动swipe来拖动屏幕，duration表示持续时间
-        self.driver.swipe(start_x=0, start_y=1500, end_x=0, end_y=550, duration=1000)
+
 if __name__ == '__main__':
-     suite = unittest.TestLoader().loadTestsFromTestCase(BestvSampleAndroidTests)
+     suite = unittest.TestLoader().loadTestsFromTestCase(BestvScreenshotAndroidTests)
      unittest.TextTestRunner(verbosity=2).run(suite)
