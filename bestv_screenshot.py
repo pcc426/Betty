@@ -5,24 +5,16 @@ from appium.webdriver.common.touch_action import TouchAction
 import unittest
 from appium import webdriver
 import time
+from bestv_config import WebDriverConfig
 
 PATH=lambda p:os.path.abspath(os.path.join(os.path.dirname(__file__), p))
 
 
 class BestvScreenshotAndroidTests(unittest.TestCase):
     def setUp(self):
-        desired_caps = {}
-        desired_caps['device'] = 'android'
-        desired_caps['platformName'] = 'Android'
-        desired_caps['version'] = 'Default'
-        desired_caps['deviceName'] = 'EUQKCUIBE6RKPNTG'
-        # 不重置app
-        desired_caps['noReset'] = 'True'
-        # 重置app时取注销下行并替换apk
-        # desired_caps['app'] = os.path.abspath('/../../../Betty/apps/Bestv_20160927_2.2.1_update_dev_r0.apk')
-        desired_caps['appPackage'] = 'com.bestv.app'
-        desired_caps['appActivity'] = 'com.bestv.app.activity.MainActivity'
-        self.driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)
+        config = WebDriverConfig()
+        config.setup_config()
+        self.driver = webdriver.Remote(config.command_executor, config.desired_capabilities)
 
     def tearDown(self):
         self.driver.quit()

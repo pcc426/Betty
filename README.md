@@ -1,2 +1,2 @@
 # Betty
-bestv appium trial project
+Appium trial project

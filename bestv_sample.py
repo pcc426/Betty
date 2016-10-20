@@ -16,7 +16,7 @@ class BestvSampleAndroidTests(unittest.TestCase):
         desired_caps['platformName'] = 'Android'
         desired_caps['version'] = 'Default'
         # 更换真机测试时需变更deviceName
-        desired_caps['deviceName'] = 'EUQKCUIBE6RKPNTG'
+        desired_caps['deviceName'] = 'G2W0215605000740'
         # 不重置app
         desired_caps['noReset'] = 'True'
         # 重置app时取注销下行并替换apk
@@ -31,8 +31,9 @@ class BestvSampleAndroidTests(unittest.TestCase):
     def test_find_element(self):
         # 等待广告
         sleep(10)
-        self.driver.find_element_by_xpath("//android.widget.Button[contains(@text, '直播')]").click()
+        self.driver.find_element_by_xpath('//android.widget.Button[@text == "直播"]').click()
         sleep(2)
+
 
     def test_swipe(self):
         # 跳过广告
