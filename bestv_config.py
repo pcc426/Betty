@@ -2,6 +2,7 @@
 
 # from appium import webdriver
 # from appium import WebDriver
+import os
 
 
 class WebDriverConfig(object):
@@ -16,12 +17,13 @@ class WebDriverConfig(object):
         desired_caps['platformName'] = 'Android'
         desired_caps['version'] = 'Default'
         # 更换真机测试时需变更deviceName
-        desired_caps['deviceName'] = '860BCNM223DL'
+        # desired_caps['deviceName'] = '23e74656'
+        desired_caps['deviceName'] = 'Nexus_5_Android_6_0'
         # 不重置app
-        desired_caps['noReset'] = 'True'
-        # 重置app时取注销下行并替换apk
-        # desired_caps['app'] = os.path.abspath('/../../../Betty/apps/Bestv_20160927_2.2.1_update_dev_r0.apk')
+        # desired_caps['noReset'] = 'True'
+        # 重置app时取注销下行并替换apk路径
+        desired_caps['app'] = os.path.abspath('/Users/pcc/Betty/apps/bestv_v2.2.2_update_ceshi_20161023175936.apk')
+        # desired_caps['app'] = '/../apps/bestv_v2.2.2_update_ceshi_20161023175936.apk'
         desired_caps['appPackage'] = 'com.bestv.app'
         desired_caps['appActivity'] = 'com.bestv.app.activity.MainActivity'
         self.desired_capabilities = desired_caps
-        # self.driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)
