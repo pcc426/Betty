@@ -6,7 +6,7 @@ import unittest
 from appium import webdriver
 from time import sleep
 from bestv_config import WebDriverConfig
-from wheel.signatures import assertTrue
+# from wheel.signatures import assertTrue
 
 PATH=lambda p:os.path.abspath(os.path.join(os.path.dirname(__file__), p))
 
@@ -24,7 +24,8 @@ class BestvLoginAndroidTests(unittest.TestCase):
     def test_telephone_login(self):
         # 等待广告
         sleep(10)
-        self.driver.find_element_by_xpath('//android.widget.Button[@text = "我的"]').click()
+        # self.driver.find_element_by_xpath('//android.widget.Button[@text = u"我的"]').click()
+        self.driver.find_element_by_xpath('//android.widget.Button[contains(@text = "我的")]').click()
         sleep(2)
         el = self.driver.find_element_by_id('loginbtn')
         if el.text == u"点击登录":
@@ -45,7 +46,7 @@ class BestvLoginAndroidTests(unittest.TestCase):
 
         # 输入手机号/密码
         phone_number = '18601750455'
-        pwd = 'bestv2016'
+        pwd = '750455'
         self.driver.find_element_by_id('phone_edit').send_keys(phone_number)
         self.driver.find_element_by_id('pwd_edit').send_keys(pwd)
         # 滑动页面,让[登录]按钮露出
@@ -56,7 +57,7 @@ class BestvLoginAndroidTests(unittest.TestCase):
         sleep(5)
 
         el = self.driver.find_element_by_id('loginbtn')
-        assertTrue(el.text != u'点击登录')
+        self.assertTrue(el.text != u'点击登录')
 
     def test_weixin_login(self):
         pass  #to-do

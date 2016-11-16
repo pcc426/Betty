@@ -5,22 +5,27 @@ from appium.webdriver.common.touch_action import TouchAction
 import unittest
 from appium import webdriver
 from time import sleep
+from bestv_config import WebDriverConfig
 
 PATH=lambda p:os.path.abspath(os.path.join(os.path.dirname(__file__), p))
 
 
 class BestvSampleAndroidTests(unittest.TestCase):
     def setUp(self):
+        config = WebDriverConfig()
+        # config.start_Appium('127.0.0.1','4723','4723')
+        sleep(10)
         desired_caps = {}
         desired_caps['device'] = 'android'
         desired_caps['platformName'] = 'Android'
         desired_caps['version'] = 'Default'
         # 更换真机测试时需变更deviceName
-        desired_caps['deviceName'] = 'G2W0215605000740'
+        # desired_caps['deviceName'] = 'CJL5T15B18017891'
+        desired_caps['deviceName'] = 'Android Emulator'
         # 不重置app
-        desired_caps['noReset'] = 'True'
+        # desired_caps['noReset'] = 'True'
         # 重置app时取注销下行并替换apk
-        # desired_caps['app'] = os.path.abspath('/../../../Betty/apps/Bestv_20160927_2.2.1_update_dev_r0.apk')
+        desired_caps['app'] = os.path.abspath('C:\Users\p\Projects\Betty\\apps\\bestv_v2.2.2_update_ceshi_20161107.apk')
         desired_caps['appPackage'] = 'com.bestv.app'
         desired_caps['appActivity'] = 'com.bestv.app.activity.MainActivity'
         self.driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)
@@ -31,9 +36,22 @@ class BestvSampleAndroidTests(unittest.TestCase):
     def test_find_element(self):
         # 等待广告
         sleep(10)
-        self.driver.find_element_by_xpath('//android.widget.Button[@text == "直播"]').click()
+        self.driver.find_element_by_xpath('//android.widget.Button[@text == u"直播"]').click()
         sleep(2)
 
+    def test_swipe_splash(self):
+        #等待广告
+        sleep(10)
+        #连续滑动
+        self.driver.swipe(start_x=800, start_y=1000, end_x=100, end_y=1000, duration=1000)
+        sleep(1)
+        self.driver.swipe(start_x=800, start_y=1000, end_x=100, end_y=1000, duration=1000)
+        sleep(1)
+        self.driver.swipe(start_x=800, start_y=1000, end_x=100, end_y=1000, duration=1000)
+        sleep(1)
+        self.driver.swipe(start_x=800, start_y=1000, end_x=100, end_y=1000, duration=1000)
+        sleep(1)
+        self.driver.swipe(start_x=800, start_y=1000, end_x=100, end_y=1000, duration=1000)
 
     def test_swipe(self):
         # 跳过广告
