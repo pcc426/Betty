@@ -1,0 +1,8 @@
+#
+
+## DIY
+*.html
+*.pyc
+local_test.py
+.idea
+
