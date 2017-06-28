@@ -1,5 +1,7 @@
 # -*- coding: UTF-8 -*-
 
+# __author__ = 'Chery Peng'
+
 import configparser
 import os
 import sys
@@ -7,7 +9,7 @@ import sys
 # sys.path.append('/Users/pcc/Betty/lib')
 
 
-class WebDriverConfig(object):
+class DriverConfig(object):
 
     def __init__(self):
         self.desired_capabilities = {}
@@ -38,3 +40,4 @@ class WebDriverConfig(object):
 
     def get_file_path(self):
         return self.file_path
+
